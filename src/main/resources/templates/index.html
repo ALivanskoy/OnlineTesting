@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Тестирование</title>
+</head>
+<body>
+
+<h1>Главная страница</h1>
+
+<p>Привет! Это веб-приложение для тестирования пользователей!</p>
+
+<p>Тут могла бы быть ваша реклама</p>
+
+<div th:if="${!isAuthenticated}">
+    <p>
+        <a href="/login">Войти</a>
+    </p>
+    <p>
+        <a href="/registration">Регистрация</a>
+    </p>
+</div>
+
+<div th:if="${isAuthenticated}">
+    <p>
+        <a href="/profile">Профиль</a>
+    </p>
+</div>
+
+</body>
+</html>
+

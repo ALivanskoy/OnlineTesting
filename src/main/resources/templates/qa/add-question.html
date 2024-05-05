@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить вопрос</title>
+</head>
+<body>
+<h1>Добавить вопрос</h1>
+<a th:href="@{/qa}">Вернуться к вопросам</a>
+<form th:action="@{/qa/add}" method="post">
+    <label for="questionText">Вопрос:</label>
+    <input type="text" id="questionText" name="questionText" required>
+    <br>
+    <label>Ответы:</label>
+    <div th:each="i : ${#numbers.sequence(1, 4)}">
+        <input type="text" th:name="|answerText_${i}|" required>
+        <input type="checkbox" th:name="|isCorrect_${i}|" value="true"> Правильный ответ
+        <br>
+    </div>
+    <button type="submit">Добавить вопрос</button>
+</form>
+
+
+</body>
+</html>
+

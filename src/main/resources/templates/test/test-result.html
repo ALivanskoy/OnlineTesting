@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты тестирования</title>
+</head>
+<body>
+<h1>Test Result</h1>
+<p th:text="'У вас ' + ${rightAnswers} + ' правильных ответов'">Результаты тестирования</p>
+<a th:href="@{/profile}">Вернуться в профиль</a>
+</body>
+</html>

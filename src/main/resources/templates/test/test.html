@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Тестирование</title>
+</head>
+<body>
+<h1>Test</h1>
+<form th:action="@{/test/submit}" method="post">
+    <div th:each="questionEntry : ${test.questions}">
+        <h3 th:text="${questionEntry.key.text}">Вопрос</h3>
+        <div th:each="answer : ${questionEntry.value}">
+            <input type="radio" th:id="${answer.id}" th:value="${answer.text}" th:name="${questionEntry.key.text}">
+            <label th:for="${answer.id}" th:text="${answer.text}">Ответы</label>
+        </div>
+    </div>
+    <button type="submit">Подтвердить</button>
+</form>
+</body>
+</html>

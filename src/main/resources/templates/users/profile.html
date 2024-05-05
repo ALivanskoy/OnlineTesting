@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Личный кабинет</title>
+</head>
+<body>
+
+<h1>Личный кабинет пользователя <span th:text="${user.username}"></span></h1>
+
+<h2>Права аккаунта</h2>
+<span th:text="${user.authorities}"></span>
+
+<h2>Обновить пароль</h2>
+<form th:action="@{/profile}" method="post">
+    <input type="hidden" th:value="${user.username}" name="username">
+    <label>Пароль: <input type="password" name="password"></label>
+    <button type="submit">Обновить</button>
+</form>
+
+<p>
+    <a href="/test">Пройти тестирование</a>
+</p>
+
+
+    <div th:if="${isModerator}">
+
+        <p>
+            <a href="/users">Список пользователей</a>
+        </p>
+
+        <p>
+            <a href="/qa">Списков вопросов</a>
+        </p>
+
+        <p>
+            <a href="/results">Списков результатов тестирования</a>
+        </p>
+
+        <div th:if="${isAdmin}" >
+        <h2>Дать права пользователю:</h2>
+        <form th:action="@{/profile/assign-roles}" th:method="post">
+            <div>
+                <label for="username">Имя пользователя:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label>Роли:</label>
+                <div>
+                    <input type="checkbox" id="user" name="roles" value="ROLE_USER">
+                    <label for="user">Пользователь</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="moderator" name="roles" value="ROLE_MODERATOR">
+                    <label for="moderator">Модератор</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="admin" name="roles" value="ROLE_ADMIN">
+                    <label for="admin">Админ</label>
+                </div>
+            </div>
+            <button type="submit">Назначить роли</button>
+        </form>
+        </div>
+    </div>
+
+<a th:href="@{/}">Вернуться на главную страницу</a>
+<br>
+<a th:href="@{/logout}">Выйти</a>
+
+</body>
+</html>
+

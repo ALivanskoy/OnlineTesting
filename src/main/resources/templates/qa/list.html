@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>QA</title>
+</head>
+<body>
+
+<a th:href="@{/profile}">Вернуться в профиль</a>
+
+<div th:if="${param.unUniqError}">
+    <p>Ошибка: Такой вопрос уже есть в БД</p>
+</div>
+<div th:if="${param.answerError}">
+    <p>Ошибка: Необходимо выбрать один правильный ответ.</p>
+</div>
+
+<h1>Список вопросов</h1>
+<table>
+    <tr>
+        <th>Вопрос</th>
+        <th>Ответы</th>
+        <th>Действия</th>
+    </tr>
+    <tr th:each="qwa : ${questionsWithAnswers}">
+        <td th:text="${qwa.question.text}"></td>
+        <td>
+            <ul>
+                <li th:each="answer : ${qwa.answers}"
+                    th:text="${answer.text} + ' (' + (${answer.correct} ? 'Correct' : 'Incorrect') + ')'"></li>
+            </ul>
+        </td>
+        <td>
+            <a th:href="@{/qa/edit/{id}(id=${qwa.question.id})}">Изменить</a>
+            <br>
+            <a th:href="@{/qa/delete/{id}(id=${qwa.question.id})}">Удалить</a>
+        </td>
+    </tr>
+</table>
+<a href="/qa/add">Добавить вопрос</a>
+</body>
+</html>
+
+
+
